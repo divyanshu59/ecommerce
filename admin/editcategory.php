@@ -94,7 +94,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                 <div class="container-fluid">
                     <h1 class="mt-4">Category</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">New Category</li>
+                        <li class="breadcrumb-item active">Edit Category</li>
                     </ol>
                     <form action="editcategory.php" method="post">
                         <label>Category Name</label>

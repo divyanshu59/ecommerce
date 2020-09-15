@@ -92,16 +92,24 @@ if (!isset($_COOKIE['adminlogin'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Category</h1>
+                    <h1 class="mt-4">Password</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">New Category</li>
+                        <li class="breadcrumb-item active">Update Password</li>
                     </ol>
-                    <form action="addcategory.php" method="post">
-                        <label>Category Name</label>
-                        <input type="text" name="name" class="form-control" required>
-                        <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control" required>
+                    <form action="changepassword.php" method="post">
+
+                        <?php
+                        if (isset($_GET['error'])) {
+                            echo "<p style='color: red;'>Password And Re-Password Do Not Match</p>";
+                        }
+                        ?>
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                        <label>Re-Enter Password</label>
+                        <input type="password" name="rpassword" class="form-control" required>
+                        <input type="hidden" name="email" value="<?php echo $email; ?>" class="form-control" required>
                         <br>
-                        <input type="submit" value="Add Category" name="submit" class="btn btn-primary " required>
+                        <input type="submit" value="Update Password" name="submit" class="btn btn-warning " required>
                     </form>
 
 
@@ -133,11 +141,16 @@ if (!isset($_COOKIE['adminlogin'])) {
 <?php
 
 if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $id = $_POST['id'];
-    $sql = "UPDATE `category` SET `name`='$name' WHERE `id` = $id ";
-    $queryRun = mysqli_query($con, $sql);
+    $password = $_POST['password'];
+    $rpassword = $_POST['rpassword'];
+    $email = $_POST['email'];
+    if ($password == $rpassword) {
+        $sql = "UPDATE `admin` SET `password`='$password' WHERE `email` = '$email' ";
+        $queryRun = mysqli_query($con, $sql);
 
-    header('Location: category.php');
+        header('Location: index.php');
+    } else {
+        header('Location: changepassword.php?error=true');
+    }
 }
 ?>
