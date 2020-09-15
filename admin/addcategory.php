@@ -90,52 +90,17 @@ if (!isset($_COOKIE['adminlogin'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <a style="float: right;" href="addcategory.php">New Category</a>
                     <h1 class="mt-4">Category</h1>
-
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Category List</li>
+                        <li class="breadcrumb-item active">New Category</li>
                     </ol>
+                    <form action="addcategory.php" method="post">
+                        <label>Category Name</label>
+                        <input type="text" name="name" class="form-control" required>
+                        <br>
+                        <input type="submit" value="Add Category" name="submit" class="btn btn-primary " required>
+                    </form>
 
-
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Edit</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Edit</th>
-                                <th>Status</th>
-
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <?php
-                            $sql = "SELECT * FROM `category`";
-                            $queryRun = mysqli_query($con, $sql);
-
-                            if (mysqli_num_rows($queryRun) > 0) {
-                                while ($row = mysqli_fetch_array($queryRun)) {
-                                    echo "
-                                    <tr>
-                                        <td>$row[1]</td>
-                                        <td><a href='editcategory.php?id=$row[1]' style='color: blue;'>Edit</a></td>
-                                        <td><a href='deletecategory.php?id=$row[0]' style='color: red;'>Delete</a></td>
-                                    </tr>
-                                    ";
-                                }
-                            }
-
-                            ?>
-
-
-                        </tbody>
-                    </table>
 
 
                 </div>
@@ -161,3 +126,15 @@ if (!isset($_COOKIE['adminlogin'])) {
 </body>
 
 </html>
+
+<?php
+
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+
+    $sql = "INSERT INTO `category`(`name`, `other`, `status`) VALUES ('$name','',1)";
+    $queryRun = mysqli_query($con, $sql);
+
+    header('Location: category.php');
+}
+?>
