@@ -142,7 +142,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                         </div>
                         <br>
                         <label>Product Images</label>
-                        <input type="file" name="name" class="form-control" required multiple accept="image/*" onchange="PreviewImage();">
+                        <input type="file" name="photo[]" class="form-control" required multiple accept="image/*" onchange="PreviewImage();">
                         <br>
                         <input type="submit" value="Add Category" name="submit" class="btn btn-primary " required>
                     </form>
@@ -189,12 +189,26 @@ if (isset($_POST['submit'])) {
     $instock = $_POST['instock'];
     $isactive = $_POST['isactive'];
     $category = $_POST['category'];
+    $photo = "";
+    //Files Handling
+    echo $total = count($_FILES['photo']['name']);
+    for ($i = 0; $i < $total; $i++) {
+        $date = date("Y-m-d");
+        $file_name = $_FILES["photo"]["name"][$i];
+        $file_tmp = $_FILES["photo"]["tmp_name"][$i];
+        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
+        $newFileName = "$siteName-$date" . time() . "$i";
+        move_uploaded_file($file_tmp, "assets/photo/" . $newFileName . '.' . $ext);
+
+        $filenameToStore = "http://localhost/ecommerce/admin/assets/photo/" . $newFileName . "." . $ext;
+        $photo .= "$filenameToStore,";
+    }
 
     $sql = "INSERT INTO `products`(`name`, `sdesc`, `ldesc`, `catid`, `features`, `cost`, `photos`, `isStock`, `status`) 
-    VALUES ('$name','$sdesc','$ldesc','','$features','$cost','$category','$instock','$isactive')";
+    VALUES ('$name','$sdesc','$ldesc','$category','$features','$cost','$photo','$instock','$isactive')";
     $queryRun = mysqli_query($con, $sql);
 
-    header('Location: products.php');
+    // header('Location: products.php');
 }
 ?>
