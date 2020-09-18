@@ -10,6 +10,11 @@ if (!isset($_COOKIE['adminlogin'])) {
     $email = $_COOKIE['adminemail'];
 }
 
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    header('Location: index.php');
+}
 
 
 ?>
@@ -98,31 +103,64 @@ if (!isset($_COOKIE['adminlogin'])) {
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">New Product</li>
                     </ol>
-                    <form action="addproduct.php" method="post" enctype="multipart/form-data">
+                    <?php
+                    $sql = "SELECT * FROM `products` where `id` = '$id'";
+                    $queryRun = mysqli_query($con, $sql);
+
+                    if (mysqli_num_rows($queryRun) > 0) {
+                        while ($row = mysqli_fetch_array($queryRun)) {
+                            $productName = $row[1];
+                            $productSdesc = $row[2];
+                            $productLdesc = $row[3];
+                            $productFeatures = $row[5];
+                            $productCost = $row[6];
+                            $productIsStock = $row[8];
+                            $productStatus = $row[9];
+                        }
+                    }
+
+                    ?>
+
+                    <form action="editproducts.php" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?php echo $id; ?>" required>
                         <label>Product Name</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <input type="text" name="name" value="<?php echo $productName; ?>" class="form-control" required>
                         <br>
                         <label>Short Description</label>
-                        <textarea name="sdesc" class="form-control" rows="5"></textarea>
+                        <textarea name="sdesc" class="form-control" rows="5"><?php echo $productSdesc; ?></textarea>
                         <br>
                         <label>Long Description</label>
-                        <textarea name="ldesc" class="form-control" rows="10"></textarea>
+                        <textarea name="ldesc" class="form-control" rows="10"><?php echo $productLdesc; ?></textarea>
                         <br>
                         <label>Features Coma Seperated (,)</label>
-                        <textarea name="features" class="form-control" rows="2"></textarea>
+                        <textarea name="features" class="form-control" rows="2"><?php echo $productFeatures; ?></textarea>
                         <br>
                         <div class="row">
                             <div class="col-md-3">
                                 <label>Product Cost (₹)</label>
-                                <input type="number" name="cost" class="form-control" required>
+                                <input type="number" value="<?php echo $productCost; ?>" name="cost" class="form-control" required>
                             </div>
                             <div class="col-md-3">
                                 <center><label>In Stock</label></center>
-                                <input type="checkbox" checked name="instock" value="1" class="form-control" required>
+                                <?php
+                                if ($productIsStock == 1) {
+                                    echo '<input type="checkbox" checked name="instock" value="1" class="form-control" >';
+                                } else {
+                                    echo '<input type="checkbox" name="instock" value="1" class="form-control" >';
+                                }
+                                ?>
+
                             </div>
                             <div class="col-md-3">
                                 <center><label>Is Active</label></center>
-                                <input type="checkbox" checked name="isactive" value="1" class="form-control" required>
+                                <?php
+                                if ($productStatus == 1) {
+                                    echo '<input type="checkbox" checked name="isactive" value="1" class="form-control" >';
+                                } else {
+                                    echo '<input type="checkbox" name="isactive" value="1" class="form-control" >';
+                                }
+                                ?>
+
                             </div>
                             <div class="col-md-3">
                                 <center><label>Select Category</label></center>
@@ -141,9 +179,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                             </div>
                         </div>
                         <br>
-                        <label>Product Images</label>
-                        <input type="file" name="photo[]" class="form-control" required multiple accept="image/*" onchange="PreviewImage();">
-                        <br>
+
                         <input type="submit" value="Add Category" name="submit" class="btn btn-primary " required>
                     </form>
 
@@ -189,24 +225,9 @@ if (isset($_POST['submit'])) {
     $instock = $_POST['instock'];
     $isactive = $_POST['isactive'];
     $category = $_POST['category'];
-    $photo = "";
-    //Files Handling
-    echo $total = count($_FILES['photo']['name']);
-    for ($i = 0; $i < $total; $i++) {
-        $date = date("Y-m-d");
-        $file_name = $_FILES["photo"]["name"][$i];
-        $file_tmp = $_FILES["photo"]["tmp_name"][$i];
-        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+    $id = $_POST['id'];
 
-        $newFileName = "$siteName-$date" . time() . "$i";
-        move_uploaded_file($file_tmp, "assets/photo/" . $newFileName . '.' . $ext);
-
-        $filenameToStore = "http://localhost/ecommerce/admin/assets/photo/" . $newFileName . "." . $ext;
-        $photo .= "$filenameToStore,";
-    }
-
-    $sql = "INSERT INTO `products`(`name`, `sdesc`, `ldesc`, `catid`, `features`, `cost`, `photos`, `isStock`, `status`) 
-    VALUES ('$name','$sdesc','$ldesc','$category','$features','$cost','$photo','$instock','$isactive')";
+    $sql = "UPDATE `products` SET `name`='$name',`sdesc`='$sdesc',`ldesc`='$ldesc',`catid`='$category',`features`='$features',`cost`='$cost',`isStock`='$instock',`status`='$isactive' WHERE id = '$id'";
     $queryRun = mysqli_query($con, $sql);
 
     header('Location: products.php');

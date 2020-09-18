@@ -113,6 +113,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                                 <th>Cost</th>
                                 <th>Stock</th>
                                 <th>Status</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -125,6 +126,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                                 <th>Cost</th>
                                 <th>Stock</th>
                                 <th>Status</th>
+                                <th>Edit</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -161,11 +163,10 @@ if (!isset($_COOKIE['adminlogin'])) {
                                         <td>$row[3]</td>
                                         <td>$category</td>
                                         <td>$featured</td>
-                                        <td>$row[6]</td>
+                                        <td>₹$row[6]</td>
                                         <td>$stock</td>
                                         <td>$status</td>
-                                      
-                                       
+                                        <td><a style='color: blue;' href='editproducts.php?id=$row[0]'>Edit</a></td>
                                     </tr>
                                     ";
                                 }
