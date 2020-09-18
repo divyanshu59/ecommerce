@@ -106,30 +106,66 @@ if (!isset($_COOKIE['adminlogin'])) {
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Edit</th>
+                                <th>Short Description</th>
+                                <th>Long Description</th>
+                                <th>Category</th>
+                                <th>Features</th>
+                                <th>Cost</th>
+                                <th>Stock</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Name</th>
-                                <th>Edit</th>
+                                <th>Short Description</th>
+                                <th>Long Description</th>
+                                <th>Category</th>
+                                <th>Features</th>
+                                <th>Cost</th>
+                                <th>Stock</th>
                                 <th>Status</th>
-
                             </tr>
                         </tfoot>
                         <tbody>
                             <?php
-                            $sql = "SELECT * FROM `category`";
+                            $sql = "SELECT * FROM `products`";
                             $queryRun = mysqli_query($con, $sql);
 
                             if (mysqli_num_rows($queryRun) > 0) {
                                 while ($row = mysqli_fetch_array($queryRun)) {
+
+                                    $stock = $row[9] ? "<span style='color: green'>In Stock </span>" : "<span style='color: red'>Out Of Stock</span>";
+
+                                    $status = $row[8] ? "<a href='changeproductstatus.php?id=$row[0]&to=0' style='color: green'>Active</a>" : "<a href='changeproductstatus.php?id=$row[0]&to=1' style='color: red'>Non-Active</a>";
+                                    $catid = $row[4];
+
+                                    $sql1 = "SELECT * FROM `category` WHERE `id` = '$catid' ";
+                                    $queryRun1 = mysqli_query($con, $sql1);
+                                    if (mysqli_num_rows($queryRun1) > 0) {
+                                        while ($row1 = mysqli_fetch_array($queryRun1)) {
+                                            $category = $row1[1];
+                                        }
+                                    }
+                                    $feat = explode(',', $row[5]);
+                                    $featured = "<ul>";
+                                    foreach ($feat as $element) {
+                                        $featured .= "<li>$element</li>";
+                                    }
+                                    $featured .= "</ul>";
+
                                     echo "
                                     <tr>
                                         <td>$row[1]</td>
-                                        <td><a href='editcategory.php?id=$row[0]' style='color: blue;'>Edit</a></td>
-                                        <td><a href='deletecategory.php?id=$row[0]' style='color: red;'>Delete</a></td>
+                                        <td>$row[2]</td>
+                                        <td>$row[3]</td>
+                                        <td>$category</td>
+                                        <td>$featured</td>
+                                        <td>$row[6]</td>
+                                        <td>$stock</td>
+                                        <td>$status</td>
+                                      
+                                       
                                     </tr>
                                     ";
                                 }
