@@ -118,11 +118,11 @@ if (!isset($_COOKIE['adminlogin'])) {
                             </div>
                             <div class="col-md-3">
                                 <center><label>In Stock</label></center>
-                                <input type="checkbox" checked name="instock" value="1" class="form-control" required>
+                                <input type="checkbox" checked name="instock" value="1" class="form-control">
                             </div>
                             <div class="col-md-3">
                                 <center><label>Is Active</label></center>
-                                <input type="checkbox" checked name="isactive" value="1" class="form-control" required>
+                                <input type="checkbox" checked name="isactive" value="1" class="form-control">
                             </div>
                             <div class="col-md-3">
                                 <center><label>Select Category</label></center>
@@ -144,7 +144,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                         <label>Product Images</label>
                         <input type="file" name="photo[]" class="form-control" required multiple accept="image/*" onchange="PreviewImage();">
                         <br>
-                        <input type="submit" value="Add Category" name="submit" class="btn btn-primary " required>
+                        <input type="submit" value="Add Product" name="submit" class="btn btn-primary " required>
                     </form>
 
 

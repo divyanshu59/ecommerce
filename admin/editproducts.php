@@ -180,7 +180,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <br>
 
-                        <input type="submit" value="Add Category" name="submit" class="btn btn-primary " required>
+                        <input type="submit" value="Update Product" name="submit" class="btn btn-warning " required>
                     </form>
 
 
