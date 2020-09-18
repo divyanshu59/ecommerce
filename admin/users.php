@@ -126,7 +126,7 @@ if (!isset($_COOKIE['adminlogin'])) {
 
                             if (mysqli_num_rows($queryRun) > 0) {
                                 while ($row = mysqli_fetch_array($queryRun)) {
-                                    $status = $row[5] ? "<a href='changeuserstatus?id=$row[0]&to=0' style='color: green'>Active</a>" : "<a href='changeuserstatus?id=$row[0]&to=1' style='color: red'>Non-Active</a>";
+                                    $status = $row[5] ? "<a href='changeuserstatus.php?id=$row[0]&to=0' style='color: green'>Active</a>" : "<a href='changeuserstatus.php?id=$row[0]&to=1' style='color: red'>Non-Active</a>";
 
                                     echo "
                                     <tr>
