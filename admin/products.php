@@ -135,9 +135,9 @@ if (!isset($_COOKIE['adminlogin'])) {
                             if (mysqli_num_rows($queryRun) > 0) {
                                 while ($row = mysqli_fetch_array($queryRun)) {
 
-                                    $stock = $row[9] ? "<span style='color: green'>In Stock </span>" : "<span style='color: red'>Out Of Stock</span>";
+                                    $stock = $row[8] ? "<span style='color: green'>In Stock </span>" : "<span style='color: red'>Out Of Stock</span>";
 
-                                    $status = $row[8] ? "<a href='changeproductstatus.php?id=$row[0]&to=0' style='color: green'>Active</a>" : "<a href='changeproductstatus.php?id=$row[0]&to=1' style='color: red'>Non-Active</a>";
+                                    $status = $row[9] ? "<a href='changeproductstatus.php?id=$row[0]&to=0' style='color: green'>Active</a>" : "<a href='changeproductstatus.php?id=$row[0]&to=1' style='color: red'>Non-Active</a>";
                                     $catid = $row[4];
 
                                     $sql1 = "SELECT * FROM `category` WHERE `id` = '$catid' ";
