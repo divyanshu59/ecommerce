@@ -94,7 +94,7 @@ if (!isset($_COOKIE['adminlogin'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <a style="float: right;" href="addcategory.php">New Category</a>
+                    <a style="float: right;" href="addproduct.php">New Product</a>
                     <h1 class="mt-4">Products</h1>
 
                     <ol class="breadcrumb mb-4">
