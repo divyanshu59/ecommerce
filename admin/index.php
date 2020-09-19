@@ -10,6 +10,10 @@ if (!isset($_COOKIE['adminlogin'])) {
     $email = $_COOKIE['adminemail'];
 }
 
+$totalUsers = 0;
+$totalCategory = 0;
+$totalProducts = 0;
+$totalOrders = 0;
 
 
 ?>
@@ -101,27 +105,27 @@ if (!isset($_COOKIE['adminlogin'])) {
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">Primary Card</div>
+                                <div class="card-body">Total Users</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link">View Details</a>
+                                    <a class="small text-white stretched-link"><?php $totalUsers; ?></a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-warning text-white mb-4">
-                                <div class="card-body">Warning Card</div>
+                                <div class="card-body">Total Category</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link">View Details</a>
+                                    <a class="small text-white stretched-link"><?php $totalCategory; ?></a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-success text-white mb-4">
-                                <div class="card-body">Success Card</div>
+                                <div class="card-body">Total Products</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link">View Details</a>
+                                    <a class="small text-white stretched-link"><?php $totalProducts; ?></a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
