@@ -1,0 +1,36 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#searchBar input[type="text"] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+}
+
+#searchBar button {
+  background-color: transparent;
+  float: right;
+  padding: 6px 10px;
+  margin-top: 6px;
+  color: white;
+  margin-right: 12px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+#searchBar button:hover {
+  background: #ccc;
+}
+
+@media screen and (max-width: 700px) {
+  #searchBar {
+    display: none;
+  }
+}
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,44 @@
+<?php
+
+include_once 'config.php';
+
+
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <?php echo $siteName; ?></title>
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="asset/css/index.css">
+</head>
+
+<body>
+    <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <span class="mdc-top-app-bar__title"> <?php echo $siteName; ?></span>
+
+
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                <form id="searchBar" action="search.php">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit" class="material-icons" name="search">search</button>
+                </form>
+                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">shopping_cart</button>
+                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">login</button>
+            </section>
+        </div>
+    </header>
+</body>
+
+</html>
