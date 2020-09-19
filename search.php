@@ -2,7 +2,9 @@
 
 include_once 'config.php';
 
-
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+}
 
 ?>
 
@@ -42,9 +44,12 @@ include_once 'config.php';
                     echo '<a class="material-icons mdc-top-app-bar__action-item mdc-icon-button" href="login.php" aria-label="Options">login</a>';
                 }
                 ?>
+
             </section>
         </div>
     </header>
+
+
 </body>
 
 </html>
