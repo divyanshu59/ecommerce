@@ -84,9 +84,10 @@ if (isset($_GET['search'])) {
                             <img src='$url' width='100%'>
                         </div>
                         <div class='col-9'>
-                            <h2>$row[1]</h2>
+                            <a href='product.php?id=$row[0]'><h2>$row[1]</h2> </a>
                             <samp>Category: $category</samp>
                             <h4>Cost: ₹ $row[6]</h4>
+                           
                         </div>
                     </div>
                     </div>

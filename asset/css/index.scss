@@ -89,6 +89,9 @@ $grid-spacing: 3%;
 }
 .col-5 {
     width: (100% / 2.4) - ($grid-spacing * 7 / 12);
+    @media screen and (max-width: $break-small) {
+        width: 100%;
+    }
 }
 .col-6 {
     width: (100% / 2) - ($grid-spacing * 6 / 12);
@@ -134,8 +137,22 @@ $grid-spacing: 3%;
         padding: 16px;
         border-radius: 5px;
         margin: 20px;
+        a {
+            text-decoration: none;
+            color: black;
+        }
         h4 {
             text-transform: uppercase;
         }
     }
+}
+.productmain {
+    padding: 0px 40px;
+    .productcard {
+        padding: 20px;
+    }
+}
+
+.mdc-image-list__item {
+    margin: 10px;
 }
