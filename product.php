@@ -120,8 +120,18 @@ if (isset($_GET['id'])) {
 
                                     <span class="mdc-button__label">Buy Now For ₹ <?php echo $row[6] ?></span>
                                 </button>
-
                             </a>
+
+
+                            <a href="addtocart.php?id=<?php echo $id; ?>" class="mdc-button ">
+                                <div class="mdc-button__ripple"></div>
+                                <i class="material-icons mdc-button__icon" aria-hidden="true">shopping_cart</i>
+                                <span class="mdc-button__label">Add To Cart</span>
+                            </a>
+
+
+
+
 
                         </div>
                     </div>
