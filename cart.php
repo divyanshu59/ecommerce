@@ -115,11 +115,21 @@ if (mysqli_num_rows($queryRun) > 0) {
                                     </div>
                                 </div>
 
-                <?php
+                    <?php
                             }
                         }
                     }
-                } ?>
+                } else {
+                    ?>
+                    <div class='my-card-content mdc-card productcard'>
+                        <center>
+                            <h3>No Products Found</h3>
+                        </center>
+
+                    </div>
+                <?php
+                }
+                ?>
             </div>
             <div class="col-6">
                 <div class='my-card-content mdc-card productcard'>
