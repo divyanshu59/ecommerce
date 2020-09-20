@@ -191,3 +191,13 @@ $grid-spacing: 3%;
     border-radius: 10px;
     text-decoration: none;
 }
+.logoutBtn {
+    float: right;
+    padding: 10px;
+    background-color: $colorMain;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}

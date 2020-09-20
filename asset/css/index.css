@@ -220,4 +220,15 @@ body {
   border-radius: 10px;
   text-decoration: none;
 }
+
+.logoutBtn {
+  float: right;
+  padding: 10px;
+  background-color: #6200ee;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
 /*# sourceMappingURL=index.css.map */
