@@ -247,7 +247,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    //   header("Location: $url");
+    header("Location: $url");
 }
 
 ?>
