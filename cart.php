@@ -100,7 +100,7 @@ if (mysqli_num_rows($queryRun) > 0) {
                                             <img src="<?php echo $imageUrl; ?>" width="100%">
                                         </div>
                                         <div class="col-10">
-                                            <a style="color: red; float: right; text-decoration: none;" href="delteproductfromcart.php?id=">Delete</a>
+                                            <a style="color: red; float: right; text-decoration: none;" href="delteproductfromcart.php?id=<?php echo $row[0]; ?>">Delete</a>
                                             <h3>Product Details</h3>
 
                                             <a style="text-decoration: none; color: black;" href="product.php?id=<?php echo $row2[0]; ?>">
