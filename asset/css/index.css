@@ -186,4 +186,28 @@ body {
 .mdc-image-list__item {
   margin: 10px;
 }
+
+.paymentForm h3 {
+  color: #6200ee;
+}
+
+.paymentForm form {
+  padding: 20px;
+}
+
+.paymentForm form input[type="text"],
+.paymentForm form input[type="email"] {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+}
+
+.paymentForm form input[type="submit"] {
+  background-color: #6200ee;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+}
 /*# sourceMappingURL=index.css.map */

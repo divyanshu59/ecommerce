@@ -92,9 +92,9 @@ if (isset($_GET['id'])) {
                             <img src='<?php echo $url ?>' width='100%'>
                         </div>
                         <div class='col-7'>
-                            <a href='product.php?id=$row[0]'>
-                                <h2><?php echo $row[1] ?></h2>
-                            </a>
+
+                            <h1><?php echo $row[1] ?></h1>
+
                             <samp>Category: <?php echo $category ?></samp>
                             <h4>Description:</h4>
                             <p><?php echo $row[2]; ?></p>
