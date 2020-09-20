@@ -144,4 +144,23 @@ body {
 .col-12 {
   width: 100%;
 }
+
+.my-card {
+  height: 350px;
+  width: 350px;
+}
+
+.main {
+  padding: 25px;
+}
+
+.main .my-card-content {
+  padding: 16px;
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.main .my-card-content h4 {
+  text-transform: uppercase;
+}
 /*# sourceMappingURL=index.css.map */

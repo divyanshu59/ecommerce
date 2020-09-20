@@ -123,3 +123,19 @@ $grid-spacing: 3%;
 .col-12 {
     width: 100%;
 }
+
+.my-card {
+    height: 350px;
+    width: 350px;
+}
+.main {
+    padding: 25px;
+    .my-card-content {
+        padding: 16px;
+        border-radius: 5px;
+        margin: 20px;
+        h4 {
+            text-transform: uppercase;
+        }
+    }
+}
