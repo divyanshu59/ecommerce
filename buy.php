@@ -160,7 +160,7 @@ if (isset($_POST['submit'])) {
 
     if ($paymode == "cod") {
         $url = "thank.php";
-        $payed = 1;
+        $payed = 0;
     } else {
         $url = "pay.php";
         $payed = 0;
@@ -180,12 +180,12 @@ if (isset($_POST['submit'])) {
     $userid = $_POST['userid'];
 
 
-    $sql = "INSERT INTO `orders`(`productid`, `name`, `email`, `phone`, `address1`, `address2`, `city`, `state`, `pincode`, `status`, `paymode`,`paymode`, `userid`, `payed`) 
-    VALUES ('$productid','$name','$email','$phone','$addressLine1','$addressLine2','$city','$state','$pincode',1, '$payed','$userid','$payed')";
+    $sql = "INSERT INTO `orders`(`productid`, `name`, `email`, `phone`, `address1`, `address2`, `city`, `state`, `pincode`, `status`, `paymode`, `userid`, `payed`) 
+    VALUES ('$productid','$name','$email','$phone','$addressLine1','$addressLine2','$city','$state','$pincode','1','$paymode','$userid','$payed')";
     $queryRun = mysqli_query($con, $sql);
 
     $_SESSION["userid"] = $userid;
-    $_SESSION["pasid"] = $pasid;
+    $_SESSION["pasid"] = $productid;
     $_SESSION["pasname"] = $pasname;
     $_SESSION["name"] = $name;
     $_SESSION["phone"] = "$phone";
@@ -247,7 +247,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    header("Location: $url");
+    //   header("Location: $url");
 }
 
 ?>
