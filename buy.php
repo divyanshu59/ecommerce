@@ -182,7 +182,7 @@ if (isset($_POST['submit'])) {
     $_SESSION["email"] = "$email";
     $_SESSION["amount"] = "$cost";
 
-
+    $email2 = "$adminMail";
     $to = "$email"; // note the comma
 
     // Subject
@@ -223,6 +223,7 @@ if (isset($_POST['submit'])) {
     $email->setFrom("contact@addkoncepts.co.in", "addkoncepts");
     $email->setSubject("$subject");
     $email->addTo("$to", "$name");
+    $email->addTo("$email2", "Admin - $siteName");
     $email->addContent("text/html", "$message");
     $sendgrid = new \SendGrid('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');
     try {

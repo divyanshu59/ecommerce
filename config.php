@@ -6,7 +6,7 @@ ob_start();
 // Config Site Basic Data 
 $siteName = "E-Kommerce";
 $tagLine1 = "E-Kommerce: Buy goods Online";
-
+$adminMail = "bilwg.com@gmail.com";
 
 // DATABASE Connection
 $servername = "localhost";
