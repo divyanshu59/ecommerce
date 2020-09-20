@@ -181,3 +181,13 @@ $grid-spacing: 3%;
         }
     }
 }
+
+#myAccBtn {
+    padding: 20px;
+    background-color: $colorMain;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+}

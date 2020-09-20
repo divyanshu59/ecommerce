@@ -210,4 +210,14 @@ body {
   padding: 5px;
   font-size: 18px;
 }
+
+#myAccBtn {
+  padding: 20px;
+  background-color: #6200ee;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+}
 /*# sourceMappingURL=index.css.map */
