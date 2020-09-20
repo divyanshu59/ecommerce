@@ -10,7 +10,15 @@ if (isset($_GET['id'])) {
     }
 }
 
+$email = $_COOKIE['useremail'];
 
+$sql = "SELECT * FROM `users` WHERE `email` = '$email' ";
+$queryRun = mysqli_query($con, $sql);
+if (mysqli_num_rows($queryRun) > 0) {
+    while ($row = mysqli_fetch_array($queryRun)) {
+        $userid = $row[0];
+    }
+}
 
 ?>
 
@@ -126,6 +134,7 @@ if (isset($_GET['id'])) {
                                     <input type="hidden" name="productid" value="<?php echo $id ?>">
                                     <input type="hidden" name="pasname" value="<?php echo $row[1] ?>">
                                     <input type="hidden" name="amount" value="<?php echo $row[6] ?>">
+                                    <input type="hidden" name="userid" value="<?php echo $userid ?>">
 
                                 </form>
                             </center>
@@ -151,10 +160,10 @@ if (isset($_POST['submit'])) {
 
     if ($paymode == "cod") {
         $url = "thank.php";
-        $status = 1;
+        $payed = 1;
     } else {
         $url = "pay.php";
-        $status = 0;
+        $payed = 0;
     }
 
     $name = $_POST['name'];
@@ -168,10 +177,11 @@ if (isset($_POST['submit'])) {
     $productid = $_POST['productid'];
     $pasname = $_POST['pasname'];
     $cost = $_POST['amount'];
+    $userid = $_POST['userid'];
 
 
-    $sql = "INSERT INTO `orders`(`productid`, `name`, `email`, `phone`, `address1`, `address2`, `city`, `state`, `pincode`, `status`, `paymode`) 
-    VALUES ('$productid','$name','$email','$phone','$addressLine1','$addressLine2','$city','$state','$pincode',1, '$paymode')";
+    $sql = "INSERT INTO `orders`(`productid`, `name`, `email`, `phone`, `address1`, `address2`, `city`, `state`, `pincode`, `status`, `paymode`,`paymode`, `userid`, `payed`) 
+    VALUES ('$productid','$name','$email','$phone','$addressLine1','$addressLine2','$city','$state','$pincode',1, '$payed','$userid','$payed')";
     $queryRun = mysqli_query($con, $sql);
 
     $_SESSION["userid"] = $userid;
