@@ -79,11 +79,11 @@ include_once 'config.php';
                     ?>
 
                             <div class="col-2">
-
-                                <img class="" width="150" src="<?php echo $url; ?>">
-                                <br>
-                                <span class="mdc-image-list__label"><?php echo $row2[1]; ?></span>
-
+                                <a href="product.php?id=<?php echo $row2[0]; ?>" style="color: black; text-decoration: none;">
+                                    <img class="" width="150" src="<?php echo $url; ?>">
+                                    <br>
+                                    <span class="mdc-image-list__label"><?php echo $row2[1]; ?></span>
+                                </a>
                             </div>
 
                     <?php
