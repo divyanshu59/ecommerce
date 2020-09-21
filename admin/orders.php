@@ -112,6 +112,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Date</th>
+                                <th>payment</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -124,6 +125,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Date</th>
+                                <th>payment</th>
                                 <th>Status</th>
                             </tr>
                         </tfoot>
@@ -137,6 +139,15 @@ if (!isset($_COOKIE['adminlogin'])) {
 
                                     $status = $row[11] ? "<a href='changeproductstatus.php?id=$row[0]&to=0' style='color: green'>Active</a>" : "<a href='changeproductstatus.php?id=$row[0]&to=1' style='color: red'>Non-Active</a>";
                                     $productId = $row[1];
+
+                                    if ($row[12] == "online") {
+                                        $payment = "<span style='color: red;'>Online (Not-Payed)</span>";
+                                        if ($row[14] == 1) {
+                                            $payment = "<span style='color: green;'>Online (Payed)</span>";
+                                        }
+                                    } else {
+                                        $payment = "<span style='color: orange;'>Pay On Delivery</span>";
+                                    }
 
                                     $sql1 = "SELECT * FROM `products` WHERE `id` = '$productId' ";
                                     $queryRun1 = mysqli_query($con, $sql1);
@@ -156,7 +167,7 @@ if (!isset($_COOKIE['adminlogin'])) {
                                         <td>$row[4]</td>
                                         <td>$row[5] <br> $row[6] <br> $row[7] $row[8] $row[9]</td>
                                         <td>$row[10]</td>
-                                       
+                                        <td>$payment</td>
                                         <td>$status</td>
                                     </tr>
                                     ";
