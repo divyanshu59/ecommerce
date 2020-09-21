@@ -45,6 +45,66 @@ include_once 'config.php';
             </section>
         </div>
     </header>
+    <br><br><br><br><br>
+
+    <?php
+    $sql = "SELECT * FROM `category` WHERE `status` = 1";
+    $queryRun = mysqli_query($con, $sql);
+
+    if (mysqli_num_rows($queryRun) > 0) {
+        while ($row = mysqli_fetch_array($queryRun)) {
+            $catid = $row[0];
+    ?>
+            <div class='my-card-content mdc-card mainPageCart'>
+                <h3><?php echo $row[1]; ?></h3>
+                <div class="row">
+
+
+                    <?php
+
+                    $sql2 = "SELECT * FROM `products` where `catid` = '$catid'";
+                    $queryRun2 = mysqli_query($con, $sql2);
+
+                    if (mysqli_num_rows($queryRun2) > 0) {
+                        while ($row2 = mysqli_fetch_array($queryRun2)) {
+
+                            if ($row2[7] != null) {
+                                $images = explode(',', $row2[7]);
+                                $url = $images[0];
+                            } else {
+                                $url = "asset/image/product.jpg";
+                            }
+
+
+                    ?>
+
+                            <div class="col-2">
+
+                                <img class="" width="150" src="<?php echo $url; ?>">
+                                <br>
+                                <span class="mdc-image-list__label"><?php echo $row2[1]; ?></span>
+
+                            </div>
+
+                    <?php
+                        }
+                    } else {
+                        echo '
+                        <div class="col-12">
+                        <center style="color: red;">No Product Found in this Category</center>
+                        <br>
+                        </div>
+                        ';
+                    }
+                    ?>
+                </div>
+            </div>
+    <?php
+        }
+    }
+    ?>
+
+
 </body>
 
 </html>
