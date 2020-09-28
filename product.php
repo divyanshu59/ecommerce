@@ -4,9 +4,20 @@ include_once 'config.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-
+    $isLogin = false;
     if (isset($_COOKIE['userlogin'])) {
         $buyUrl = "buy.php?id=$id";
+        $isLogin = true;
+
+        $email = $_COOKIE['useremail'];
+
+        $sql = "SELECT * FROM `users` WHERE `email` = '$email' ";
+        $queryRun = mysqli_query($con, $sql);
+        if (mysqli_num_rows($queryRun) > 0) {
+            while ($row = mysqli_fetch_array($queryRun)) {
+                $userid = $row[0];
+            }
+        }
     } else {
         $buyUrl = "login.php";
     }
@@ -29,6 +40,7 @@ if (isset($_GET['id'])) {
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="asset/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -164,6 +176,93 @@ if (isset($_GET['id'])) {
                         </div>
 
                     </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Reviews</h1>
+                            <?php
+                            if ($isLogin) {
+                            ?>
+                                <form id="feedback" action="product.php?id=<?php echo $id; ?>" method="post">
+
+                                    <div class="rating">
+                                        <label>
+                                            <input type="radio" name="stars" value="1" />
+                                            <span class="icon">★</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="stars" value="2" />
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="stars" value="3" />
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="stars" value="4" />
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="stars" value="5" />
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                            <span class="icon">★</span>
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="userid" value="<?php echo $userid ?>">
+                                    <input type="hidden" name="productid" value="<?php echo $id ?>">
+                                    <input type="text" name="feedback" placeholder="Feedback" id="" required>
+                                    <input type="submit" name="submit" value="Give Feedback">
+                                </form>
+                                <?php
+                            } else {
+                                echo "<a href='login.php' style='color: red;'>Please Login To Write A Review..</a> <br> <br>";
+                            }
+
+                            $sql3 = "SELECT * FROM `feedback` WHERE `productid` = $id AND `status` = 1 ";
+                            $queryRun3 = mysqli_query($con, $sql3);
+                            if (mysqli_num_rows($queryRun3) > 0) {
+                                while ($row3 = mysqli_fetch_array($queryRun3)) {
+                                    $userid = $row3[1];
+                                    $sql4 = "SELECT * FROM `users` WHERE `id` = $userid ";
+                                    $queryRun4 = mysqli_query($con, $sql4);
+                                    if (mysqli_num_rows($queryRun4) > 0) {
+                                        while ($row4 = mysqli_fetch_array($queryRun4)) {
+                                            $username = $row4[1];
+                                        }
+                                    }
+                                ?>
+
+                                    <div class='my-card-content mdc-card reviewCard'>
+                                        <h3><?php echo $username ?></h3>
+
+                                        <div class="stars">
+                                            <?php
+                                            for ($i = 0; $i < $row3[3]; $i++) {
+                                                echo '<i class="fa fa-star" aria-hidden="true"></i>';
+                                            }
+                                            ?>
+                                        </div>
+
+                                        <p><?php echo $row3[4] ?></p>
+                                    </div>
+                            <?php
+                                }
+                            }
+                            ?>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
         <?php
@@ -174,3 +273,20 @@ if (isset($_GET['id'])) {
 </body>
 
 </html>
+
+<?php
+
+if (isset($_POST['submit'])) {
+    $productid = $_POST['productid'];
+    $stars = $_POST['stars'];
+    $userid = $_POST['userid'];
+    $feedback = $_POST['feedback'];
+
+    $sql = "INSERT INTO `feedback`(`userid`, `productid`, `star`, `text`, `status`) 
+    VALUES ('$userid','$productid','$stars','$feedback','1')";
+    $queryRun = mysqli_query($con, $sql);
+
+    header("Location: product.php?id=$productid");
+}
+
+?>

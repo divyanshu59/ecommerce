@@ -236,4 +236,97 @@ body {
   padding: 0px 40px;
   margin: 20px;
 }
+
+.reviewCard {
+  padding: 10px;
+}
+
+.reviewCard .stars {
+  display: inline;
+}
+
+.reviewCard .stars .fa-star {
+  color: gold;
+}
+
+#feedback input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+}
+
+#feedback input[type="submit"] {
+  background-color: #6200ee;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+}
+
+#feedback .rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+#feedback .rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+#feedback .rating label:last-child {
+  position: static;
+}
+
+#feedback .rating label:nth-child(1) {
+  z-index: 5;
+}
+
+#feedback .rating label:nth-child(2) {
+  z-index: 4;
+}
+
+#feedback .rating label:nth-child(3) {
+  z-index: 3;
+}
+
+#feedback .rating label:nth-child(4) {
+  z-index: 2;
+}
+
+#feedback .rating label:nth-child(5) {
+  z-index: 1;
+}
+
+#feedback .rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+#feedback .rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+#feedback .rating label:last-child .icon {
+  color: #000;
+}
+
+#feedback .rating:not(:hover) label input:checked ~ .icon,
+#feedback .rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+#feedback .rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
+}
 /*# sourceMappingURL=index.css.map */
