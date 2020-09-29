@@ -94,63 +94,33 @@ if (!isset($_COOKIE['adminlogin'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <a style="float: right;" href="addfaq.php">New FAQ</a>
                     <h1 class="mt-4">Frequently Asked Questions</h1>
-
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active"> Frequently Asked Questions List</li>
+                        <li class="breadcrumb-item active">New Frequently Asked Questions</li>
                     </ol>
-
-
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Questions</th>
-                                <th>Answer</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Questions</th>
-                                <th>Answer</th>
-                                <th>Status</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
+                    <form action="addfaq.php" method="post">
+                        <label>Select Product</label>
+                        <select class="form-control" name="productid">
                             <?php
-                            $sql = "SELECT * FROM `faq`";
+                            $sql = "SELECT * FROM `products`";
                             $queryRun = mysqli_query($con, $sql);
 
                             if (mysqli_num_rows($queryRun) > 0) {
                                 while ($row = mysqli_fetch_array($queryRun)) {
-                                    $productid = $row[1];
-                                    $sql2 = "SELECT * FROM `products` WHERE `id` = $productid";
-                                    $queryRun2 = mysqli_query($con, $sql2);
-
-                                    if (mysqli_num_rows($queryRun2) > 0) {
-                                        while ($row2 = mysqli_fetch_array($queryRun2)) {
-                                            $productName = $row2[1];
-                                        }
-                                    }
-                                    echo "
-                                    <tr>
-                                        <td>$productName</td>
-                                        <td>$row[2]</td>
-                                        <td>$row[3]</td>
-                                        <td><a href='deletefaq.php?id=$row[0]' style='color: red;'>Delete</a></td>
-                                    </tr>
-                                    ";
+                                    echo "<option value='$row[0]'>$row[1]</option>";
                                 }
                             }
-
                             ?>
+                        </select>
 
+                        <label>Question</label>
+                        <input type="text" name="question" class="form-control" required>
+                        <label>Answer</label>
+                        <input type="text" name="answer" class="form-control" required>
+                        <br>
+                        <input type="submit" value="Add Frequently Asked Questions" name="submit" class="btn btn-primary " required>
+                    </form>
 
-                        </tbody>
-                    </table>
 
 
                 </div>
@@ -176,3 +146,18 @@ if (!isset($_COOKIE['adminlogin'])) {
 </body>
 
 </html>
+
+<?php
+
+if (isset($_POST['submit'])) {
+    $productid = $_POST['productid'];
+    $question = $_POST['question'];
+    $answer = $_POST['answer'];
+
+    $sql = "INSERT INTO `faq`(`productid`, `question`, `answer`, `status`) 
+    VALUES ('$productid','$question','$answer','1')";
+    $queryRun = mysqli_query($con, $sql);
+
+    header('Location: faq.php');
+}
+?>
