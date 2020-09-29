@@ -263,6 +263,35 @@ if (isset($_GET['id'])) {
 
                     </div>
 
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Frequently Asked Questions</h1>
+                            <?php
+                            $sql5 = "SELECT * FROM `faq` WHERE `productid` = $id AND `status` = 1 ";
+                            $queryRun5 = mysqli_query($con, $sql5);
+                            if (mysqli_num_rows($queryRun5) > 0) {
+                                while ($row5 = mysqli_fetch_array($queryRun5)) {
+                            ?>
+
+                                    <div class='my-card-content mdc-card reviewCard'>
+                                        <h3><?php echo $row5[2] ?></h3>
+                                        <p><?php echo $row5[3] ?></p>
+                                    </div>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <div class='my-card-content mdc-card reviewCard'>
+                                    <h3>No Questions</h3>
+
+                                </div>
+                            <?php
+                            }
+                            ?>
+
+                        </div>
+
+                    </div>
                 </div>
 
         <?php
